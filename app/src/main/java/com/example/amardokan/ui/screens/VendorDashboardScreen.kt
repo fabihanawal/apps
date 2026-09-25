@@ -205,7 +205,7 @@ fun VendorDashboardScreen(
                             shape = RoundedCornerShape(8.dp)
                         ) {
                             Text(
-                                text = "স্ট্যাটাস: ${currentShop.status} ${if (currentShop.status == 'Active'.toString()) '✓' else ''}",
+                                text = "স্ট্যাটাস: ${currentShop.status} ${if (currentShop.status == "Active") "✓" else ""}",
                                 color = when (currentShop.status) {
                                     "Active" -> White
                                     "Pending" -> Amber500
