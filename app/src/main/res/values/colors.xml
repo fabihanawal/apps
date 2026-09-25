@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#047857</color>
+    <color name="primary_variant">#065F46</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="secondary">#059669</color>
+    <color name="accent_gold">#D97706</color>
+    <color name="background">#FAFAF9</color>
+    <color name="surface">#FFFFFF</color>
+</resources>

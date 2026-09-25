@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">আমার দোকান - বদলগাছী, নওগাঁ</string>
+    <string name="platform_subtitle">বদলগাছী, নওগাঁর স্থানীয় উদ্যোক্তা ও দোকানদারদের অনলাইন মার্কেটপ্লেস</string>
+    <string name="developer_tagline">Developed by RSTS-BD (01755383039)</string>
+    <string name="tab_storefront">দোকানসমূহ</string>
+    <string name="tab_vendor">উদ্যোক্তা প্যানেল</string>
+    <string name="tab_tracker">অর্ডার ট্র্যাক</string>
+    <string name="tab_admin">অ্যাডমিন</string>
+</resources>

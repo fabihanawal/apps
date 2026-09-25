@@ -1,0 +1,9 @@
+{
+  "name": "আমার দোকান - বদলগাছী, নওগাঁ",
+  "description": "বদলগাছী, নওগাঁর স্থানীয় উদ্যোক্তা ও দোকানদারদের অনলাইন মার্কেটপ্লেস। Developed by RSTS-BD (01755383039)।",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+

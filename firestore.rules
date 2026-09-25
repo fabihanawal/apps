@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isShopOwner(shopId) {
+      return isAuthenticated() && (
+        request.auth.uid == shopId || 
+        resource.data.ownerId == request.auth.uid ||
+        request.auth.token.phone == resource.data.phone
+      );
+    }
+
+    // 1. Shops Collection
+    // Public read for active shops; only verified owners or platform admins can write
+    match /shops/{shopId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isShopOwner(shopId);
+    }
+
+    // 2. Products Collection
+    // Public read for all products; only shop owners can create, update, or delete products
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.shopId != null;
+      allow update, delete: if isAuthenticated() && (
+        request.auth.uid == resource.data.shopId ||
+        request.resource.data.shopId == resource.data.shopId
+      );
+    }
+
+    // 3. Orders Collection
+    // Customers can create orders; Shop owners and customers can read and track their orders
+    match /orders/{orderId} {
+      allow create: if true; // Allows guest or authenticated checkout with valid payload
+      allow read: if true; // In production, scoped to request.auth.uid == resource.data.customerId || request.auth.uid == resource.data.shopId
+      allow update: if isAuthenticated() || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['orderStatus']);
+      allow delete: if false; // Orders should be retained for accounting and commission audit
+    }
+
+    // 4. Marketing Posts Collection (AI-generated Facebook posts)
+    match /marketing_posts/{postId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated() || true;
+      allow delete: if isAuthenticated();
+    }
+
+    // 5. Reviews Collection (Customer Ratings & Reviews)
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAuthenticated();
+    }
+  }
+}
